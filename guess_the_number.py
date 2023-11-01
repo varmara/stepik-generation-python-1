@@ -17,7 +17,7 @@ the message 'Correct, congratulations!'
 
 Change log
 
-- Add the ability to specify the right boundary 
+- Add the ability to specify the left and right boundary 
 for random number selection (from 1 to n).
 - Add the ability to generate a new number (play again),
 after the user has guessed the number.
@@ -55,8 +55,8 @@ def hint(guess: int, n: int) -> str:
     greater than or equals to the generated one.
 
     Args:
-        guess (integer): The user guess.
-        n (_type_): The generated number.
+        guess (int): The user guess.
+        n (int): The generated number.
 
     Returns:
         str: A hint indicating if the user's number is less than, 
