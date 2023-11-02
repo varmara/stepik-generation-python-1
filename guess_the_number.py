@@ -50,6 +50,21 @@ def get_integer_input_in_range(prompt: str, lower: int, upper: int) -> int:
             print("Invalid input. Please enter an integer.")
     return user_input
 
+def user_confirms(prompt: str) -> bool:
+    """Asks the user a yes/no question and returns a Boolean value.
+
+    Args:
+        prompt (str): A question to ask.
+
+    Returns:
+        bool: True if the user says 'yes' or 'y', False if 'no' or 'n'.
+    """
+    valid_responses = {'yes', 'y', 'no', 'n'}
+    response = None
+    while response is None or response not in valid_responses:
+        response = input(prompt + ' (yes, no): ').strip().lower()
+    return response in {'yes', 'y'}
+
 def hint(guess: int, n: int) -> str:
     """Hints the user if their number is less than, 
     greater than or equals to the generated one.
@@ -74,11 +89,12 @@ def play_game():
     within a specified range.
 
     The function prompts the user to enter the boundaries of the number 
-    range and generates a random number within that range.It then repeatedly 
+    range and generates a random number within that range. It then repeatedly 
     prompts the user to guess the generated number and provides hints until 
     the user correctly guesses the number.
 
-    This function doesn't accept any arguments or return values.
+    Args:
+        None
     """
     print('Enter the range in which you want to generate the number')
     left = get_integer_input_in_range('Left boundary', 1, 100)
@@ -91,41 +107,19 @@ def play_game():
         print(hint(guess, n))
     print('Congratulations!')
 
-def wants_to_play_again(prompt: str) -> bool:
-    """Asks the user if they want to play again and 
-    returns a Boolean value.
+def main():
+    """Starts the Number Guesser game.
+
+    This function welcomes the player, then repeatedly plays the game 
+    until the player chooses to quit.
 
     Args:
-        prompt (str): A question to ask.
-
-    Returns:
-        bool: True if the user wants to play again, False if not.
-    """
-    valid_responses = {'yes', 'y', 'no', 'n', 'quit', 'q'}
-    response = None
-    print(prompt)
-    while response is None or response not in valid_responses:
-        print('Please enter either "yes", "no", or "quit".')
-        response = input('Would you like to play again? (yes, no, quit): ').strip().lower()
-    return response in {'yes', 'y'}
-
-def main():
-    """Entry point for the Number Guesser game.
-
-    This function initializes the Number Guesser game, displaying a welcome 
-    message and then repeatedly calling the `play_game` function to play the game. 
-    After each game, it asks the player if they want to play again using 
-    the `play_again` function. If the player chooses to play again, 
-    the game continues. If not, the game exits with a farewell message.
-
-    The game loop runs indefinitely until the player decides not to play again.
-
-    This function doesn't accept any arguments or return values.
+        None
     """
     print('\nWelcome to the Number Guesser\n')
     while True:
         play_game()
-        if not wants_to_play_again("Would you like to play again?"):
+        if not user_confirms("Would you like to play again?"):
             print('\nThank you for playing the number guesser. See you again...\n')
             break
 
