@@ -4,19 +4,20 @@
 Caesar Cipher Encryption and Decryption
 
 Project Description
-This project is to create a Python program that can encrypt and decrypt text 
-using the Caesar cipher. 
+
+This Python program uses the Caesar cipher to encrypt and decrypt text.
+After finishing the task, asks the user if they want to use the program again.
+
 The program will prompt the user for the following information:
 
-direction: 'encrypt' or 'decrypt'
-lang: Language, 'ru' for Russian or 'en' for English
-shift: The number of positions to shift the letters
-txt: Text to encrypt/decrypt
+Direction: 'encrypt' or 'decrypt'
+Language:  'ru' for Russian or 'en' for English
+Shift:     The number of positions to shift the letters
+Text:      Text to encrypt/decrypt
 
-The Russian alphabet is assumed to have 32 letters
-(the letter `ё` in the original text is replaced with `е`).
-Non-alphabetic characters (punctuation, spaces, numbers), are not changed.
-The case of the letters is preserved.
+Russian alphabet assumed to have 32 letters (ё is replaced with е).
+Non-alphabetic characters (punctuation, spaces, numbers) remain unchanged. 
+Letter case is preserved.
 """
 
 from guess_the_number import get_integer_input_in_range, user_confirms
@@ -91,6 +92,26 @@ def is_in_language(letter_ord: int, language: str) -> bool:
     return False
 
 def caesar(text, direction, n_letters, shift, language):
+    """Perform Caesar Cipher Encryption and Decryption.
+
+    This function encrypts or decrypts the input text using the Caesar 
+    cipher algorithm and returns the result.
+
+    Args:
+        text (str): The text to encrypt or decrypt.
+        direction (int): The encryption/decryption direction (1 - encrypt, -1 - decrypt).
+        n_letters (int): The number of letters in the alphabet for the specified language.
+        shift (int): The number of positions to shift the letters.
+        language (str): The language (ru for Russian or en for English).
+
+    Returns:
+        str: The encrypted or decrypted text.
+
+    Note:
+    - For Russian language (ru), the letter 'ё' is replaced with 'е'.
+    - Non-alphabetic characters (punctuation, spaces, numbers) are not changed.
+    - The case of the letters is preserved.
+    """
     base_ord = (ord('a'), ord('A')) if language == 'en' else (ord('а'), ord('А')) 
     output = ''
     for character in text:
@@ -109,6 +130,22 @@ def caesar(text, direction, n_letters, shift, language):
     return output
 
 def cipher():
+    """Perform Encryption or Decryption.
+
+    This function interactively prompts the user to input programs parameters:
+    - choose between Caesar cipher encryption or decryption
+    - choose the language
+    - input a shift value
+    - provide a text to be encrypted or decrypted
+    Than it calls the Caesar cipher algorithm to process the input text 
+    and prints the result.
+
+    Args:
+        None
+
+    Returns:
+        None
+    """
     language_codes = {'en': 26, 'ru': 32}
     direction = get_direction() 
     language = get_language(language_codes)
@@ -135,9 +172,6 @@ def main():
         if not user_confirms("Would you like to cipher/decipher something else?"):
             print('\nThank you for using the Ceasar Cipher. See you again...\n')
             break
-
-
-
 
 if __name__ == "__main__":
     main()
