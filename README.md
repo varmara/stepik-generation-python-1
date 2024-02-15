@@ -1,6 +1,6 @@
 # Study Projects Repository for "Generation Python: Course for Beginners"
 
-This repository contains study projects from the "Generation Python: Course for Beginners" on [Stepik](https://stepik.org/course/58852/). These projects have evolved beyond the course assignments to provide practical experience in writing Python programs.
+This repository contains study projects from the "Python Generation: Course for Beginners" on [Stepik](https://stepik.org/course/58852/). These projects have evolved beyond the course assignments to provide practical experience in writing Python programs.
 
 
 ## Projects
