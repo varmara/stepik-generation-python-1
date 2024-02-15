@@ -55,6 +55,10 @@ class TestGetDirection(unittest.TestCase):
             self.assertEqual(printed_output.count("Invalid direction. Please try again."), 2)
             self.assertEqual(result, -1)
 
+class TestGetLanguage(unittest.TestCase):
+    # TODO: Test get_language (Unsupported language) 
+    pass
+
 class TestIsInLanguage(unittest.TestCase):
     def test_in_russian(self):
         self.assertEqual(is_in_language(ord('а'), 'ru'), True)
@@ -82,18 +86,81 @@ class TestIsInLanguage(unittest.TestCase):
 
 class TestCaesar(unittest.TestCase):
     def test_ru_encrypt(self):
-        # Test encryption caesar(text, direction, n_letters, shift, language)
+        # Test encryption in Russian
+        direction = 1
+        language = 'ru'
         self.assertEqual(
-            caesar("Умом Россию не понять!", 1, 32, 1, 'ru'), 
+            caesar("Умом Россию не понять!", direction, 32, 1, language), 
             "Фнпн Спттйя ож рпоауэ!"
+            )
+        self.assertEqual(
+            caesar("Блажен, кто верует, тепло ему на свете!", direction, 32, 10, language), 
+            "Лхкрпч, фьш мпъэпь, ьпщхш пцэ чк ымпьп!"
             )
     
     def test_ru_decrypt(self):
-        # Test encryption caesar(text, direction, n_letters, shift, language)
+        # Test decryption in Russian
+        direction = -1
+        language = 'ru'
         self.assertEqual(
-            caesar("Фнпн Спттйя ож рпоауэ!", -1, 32, 1, 'ru'), 
+            caesar("Фнпн Спттйя ож рпоауэ!", direction, 32, 1, language), 
             "Умом Россию не понять!"
             )
+        self.assertEqual(
+            caesar("Лхкрпч, фьш мпъэпь, ьпщхш пцэ чк ымпьп!", direction, 32, 10, language), 
+            "Блажен, кто верует, тепло ему на свете!"
+            )
+        self.assertEqual(
+            caesar("Шсъцхр щмчжмщ йшм, нмтзж йшм лхшщзщг.", direction, 32, 7, language), 
+            "Скупой теряет все, желая все достать."
+            )
+
+    def test_en_encrypt(self):
+        # Test encryption in English  
+        direction = 1
+        language = 'en'
+        n_letters = 26
+        self.assertEqual(
+            caesar("avetruetocaesar", direction, n_letters, 1, language), 
+            "bwfusvfupdbftbs"
+            )
+        self.assertEqual(
+            caesar("@Rerrf, Ergrwe - Ffewewf", direction, n_letters, 14, language), 
+            "@Fsfft, Sfufks - Ttskskt"
+            )
+        self.assertEqual(
+            caesar("To be, or not to be, that is the question!", direction, n_letters, 17, language), 
+            "Kf sv, fi efk kf sv, kyrk zj kyv hlvjkzfe!"
+            )
+        
+    def test_en_decrypt(self):
+        # Test decryption in English
+        direction = -1
+        language = 'en'
+        n_letters = 26
+        self.assertEqual(
+            caesar("bwfusvfupdbftbs", direction, n_letters, 1, language), 
+            "avetruetocaesar"
+            )
+        self.assertEqual(
+            caesar("@Fsfft, Sfufks - Ttskskt", direction, n_letters, 14, language), 
+            "@Rerrf, Ergrwe - Ffewewf"
+            )
+        self.assertEqual(
+            caesar("Sgd fqzrr hr zkvzxr fqddmdq nm sgd nsgdq rhcd ne sgd edmbd.", direction, n_letters, 25, language), 
+            "The grass is always greener on the other side of the fence."
+            )
+        self.assertEqual(
+            caesar("Hawnj pk swhg xabkna ukq nqj.", direction, n_letters, 22, language), 
+            "Learn to walk before you run."
+            )
+
+class TestCipher(unittest.TestCase):
+    # TODO: Test cipher (a round of encryption/decryption)
+    pass
+
+
 
 if __name__ == '__main__':
     unittest.main()
+

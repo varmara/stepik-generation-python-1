@@ -23,8 +23,7 @@ for random number selection (from 1 to n<100)."
 - Add the ability to generate a new number (play again),
 after the user has guessed the number.
 
-TODO: 
-- Add counting attempts made by the user. When the number is guessed,
+TODO: Add counting attempts made by the user. When the number is guessed,
 the program shows the number of attempts (total, valid, invalid).
 """
 
